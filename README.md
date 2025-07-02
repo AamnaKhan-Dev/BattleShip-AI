@@ -113,5 +113,3 @@ Do the same in `on_game_back_button_pressed()` if needed.
 
 **Tags:**
 `Python` · `Tkinter` · `Reinforcement Learning` · `Game AI` · `MDP` · `Battleship` · `Semester Project` · `Q-Learning`
-
-```
