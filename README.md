@@ -1,38 +1,117 @@
-# BattleShip-game-in-Python
-A demo game in python using tkinter.
+# Battleship AI Game
 
-## Requirements: 
-  1. Python 3.+.
-  2. PNG viewing in the GUI: Python Imaging Library (**PIL**) *ImageTk*. 
-    Can be installed using command `sudo apt-get install python-imaging-tk` for linux. 
-    It is optional. If you don't want the cool image background as shown above, you can skip this.
+A smart, Python-powered twist on the classic Battleship game — where you face off against a learning AI bot that improves its aim using Reinforcement Learning (RL) and MDP-style logic.
 
-## Setup instructions:
-  1. Download or import the project.
-  2. Open `main.py` file (if you don't have installed **PIL** you should open `main_without_image.py`).
-  3. Run and enjoy the game.
-  
-## Creating a custom bot:
-  If someone wants to create own bot and play agains it, it is possible to create and integrate a custom bot.
-  Sees the instruction how to do that, below.
-      
-### Bot class requirements:
-  1. It must be a class
-  2. It must have a function `say(value: str)` that returns *tuple* of Integers, 
-  coordinates of the field where the bot wants to shoot `(x, y)`.
-  There, `value` is a string which can be only one of these three values:
-      * "**shoot**" - means, the player missed, and bot's turn.
-      * "**hit**" - means, bot's previous shoot was successful, but didn't destroy the player's ship complataly.
-      * "**destroyed**" - means, bot's previous shoot was successful, and destroyed the player's ship complataly.
-  As an example open `bots.py` file, and see the bot ***Fati***.
-  
-### Adding the custom bot:
-  1. Open `bots.py` file.
-  2. Paste implementation of a custom bot class bellow the bot ***Fati*** class.
-  3. Open 'main.py` file.
-  4. Go to `class Main` > `def __init__(self):`.
-  5. Find the line `self.__bot = bots.Fati()`.
-  6. Change it to `self.__bot = bots.CustomBot()` (here *"CustomBot"* is a created bot's name).
-  5. Go to `class Main` > `def on_game_back_button_pressed(self):`, 
-  6. Change the line `self.__bot = bots.Fati()` to `self.__bot = bots.CustomBot()` 
-  (here *"CustomBot"* the same as within step **5**)
+---
+
+## Overview
+
+This project is a desktop version of Battleship built with Python and Tkinter. It features an intelligent bot opponent that doesn't shoot randomly — it adapts based on hit patterns, uses a Q-table for reinforcement learning, and applies open-book strategies like checkerboard scanning and directional follow-ups.
+
+Game outcomes are saved in a `reinforcement_data.json` file, allowing the bot to improve performance over time.
+
+---
+
+## My Role – *Aamna Khan*
+
+As part of this team-based AI semester project, I contributed primarily to the **AI logic design**:
+
+- **Designed and implemented** the AI decision-making in `bots.py`  
+- Implemented basic **Q-table-based reinforcement learning**  
+- Applied **MDP-style logic** for shot decisions (hunt, target, destroy)  
+- Added smart features like **checkerboard scanning** and **orientation-based targeting**  
+- Managed **game memory using JSON** so the bot could learn across sessions
+
+---
+
+## Features
+
+- 🤖 AI bot with open-book strategy and RL-based learning
+- 🧠 Smart targeting using hit-tracking and Q-value updates
+- 🔄 Memory stored in JSON for persistent bot behavior
+- 🖼 GUI built with Tkinter (with or without image backgrounds)
+- 🧩 Supports custom bot integration
+
+---
+
+## 🛠️ Setup Instructions
+
+1. (Optional) Install Pillow for background images:
+   ```bash
+   pip install pillow
+
+2. Run the game:
+
+   * With image support:
+
+     ```bash
+     python main.py
+     ```
+   * Without image support:
+
+     ```bash
+     python main_without_image.py
+     ```
+
+---
+````
+## 📂 Project Structure
+.
+├── main.py                  # Game launcher with images
+├── main_without_image.py    # Game launcher without images
+├── bots.py                  # AI logic and all bot classes
+├── reinforcement_data.json  # Stores Q-table for RL
+├── drawable/                # Background images (optional)
+├── frames.py                # GUI frames
+├── res.py, objects.py       # Game logic, helpers, resources
+├── exceptions.py            # Custom error handling
+````
+---
+
+## 🤖 Create Your Own Bot
+
+Want to challenge the default bot? You can create your own strategy:
+
+### 1. Define a Bot Class
+
+In `bots.py`, add your custom bot class like this:
+
+```python
+class MyBot:
+    def say(self, value: str):
+        # return (x, y) coordinates based on the current game state
+        return 5, 5 #placeholder values
+```
+Where `value` can be:
+
+* `"shoot"` – it's the bot’s turn
+* `"hit"` – bot hit a ship (not sunk)
+* `"destroyed"` – bot sunk a ship
+
+### 2. Register Your Bot
+
+In `main.py`, find:
+
+```python
+self.__bot = bots.Fati()
+```
+
+Replace with:
+
+```python
+self.__bot = bots.MyBot()
+```
+
+Do the same in `on_game_back_button_pressed()` if needed.
+
+---
+
+> “It doesn’t just guess — it hunts.”
+> — Battleship AI Bot
+
+---
+
+**Tags:**
+`Python` · `Tkinter` · `Reinforcement Learning` · `Game AI` · `MDP` · `Battleship` · `Semester Project` · `Q-Learning`
+
+```
